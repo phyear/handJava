@@ -16,12 +16,13 @@ public class StreamSort implements SortFactory {
         this.rangle=rangle;
         this.size=size;
     }
-    public static List<Integer> init(){
-        return new StreamSort().getList();
+    public static Map<Integer,List<Integer>> init(){
+        return new StreamSort().getMap();
     }
 
-    public static List<Integer> init(int size,int rangle){
-        return new StreamSort(size,rangle).getList();
+    public static Map<Integer,List<Integer>> init(int size,int rangle){
+        return new StreamSort(size,rangle).getMap();
+
     }
 
     public List<Integer> getList() {

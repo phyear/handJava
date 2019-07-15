@@ -17,12 +17,12 @@ public class ForSort implements SortFactory {
         this.rangle=rangle;
         this.size=size;
     }
-    public static List<Integer> init(){
-        return new ForSort().getList();
+    public static Map<Integer,List<Integer>>  init(){
+        return new ForSort().getMap();
     }
 
-    public static List<Integer> init(int size,int rangle){
-        return new ForSort(size,rangle).getList();
+    public static Map<Integer,List<Integer>>  init(int size,int rangle){
+        return new ForSort(size,rangle).getMap();
     }
 
     public List<Integer> getList() {
@@ -63,8 +63,7 @@ public class ForSort implements SortFactory {
           List<Integer> list=map.get(key);
           Integer[] aa=list.toArray(new Integer[list.size()]);
           aa=maopao(aa);
-
-           mapw.put(key, Arrays.asList(aa));
+          mapw.put(key, Arrays.asList(aa));
         }
         return  mapw;
   }
