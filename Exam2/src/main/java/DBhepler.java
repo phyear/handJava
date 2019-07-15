@@ -18,7 +18,7 @@ public class DBhepler{
     public DBhepler(String sql) {
         try {
             Properties properties=new Properties();
-            InputStream is=new FileInputStream("/db.properties");
+            InputStream is=new FileInputStream("db.properties");
             properties.load(is);
             Class.forName(properties.getProperty("driverClass"));//指定连接类型
             conn = DriverManager.getConnection(properties.getProperty("url"),properties.getProperty("user"),properties.getProperty("password"));//获取连接

@@ -28,38 +28,50 @@ public class StreamSort implements SortFactory {
     public List<Integer> getList() {
         Random random=new Random();
         List<Integer> list=new ArrayList<Integer>();
-        random.ints(size, rangle).forEach(n->list.add(n));
+        random.ints(0,rangle).limit(size).forEach(n-> list.add(n));
+
         return list;
     }
+
+
     public Map<Integer,List<Integer>> getMap(){
         Map<Integer,List<Integer>> map=new HashMap<Integer, List<Integer>>();
         List<Integer> list=getList();
-        for (Integer value:list){
-            int va=value/10;
-            if(map.get(va)!=null){
-                List<Integer> a=map.get(va);
-                a.add(value);
-                map.remove(va);
-                map.put(va,a);
+
+        Map<Integer, List<Integer>> finalMap = map;
+        list.stream().forEach(n->{
+            int va=n/10;
+            if(finalMap.get(va)!=null){
+                List<Integer> a= finalMap.get(va);
+                a.add(n);
+                finalMap.remove(va);
+                finalMap.put(va,a);
             }
             else{
                 List<Integer> a=new ArrayList<Integer>();
-                a.add(value);
-                map.put(va,a);
+                a.add(n);
+                finalMap.put(va,a);
             }
-        }
+        });
+
+
+
         map=sort(map);
         return map;
     }
+
+
     public Map<Integer,List<Integer>> sort(Map<Integer,List<Integer>> map){
         Map<Integer,List<Integer>> mapw=new HashMap<Integer, List<Integer>>();
+        map.keySet().stream().forEach(n->
+                {
+                    List<Integer> list=map.get(n);
+                    Integer[] aa=list.toArray(new Integer[list.size()]);
+                    aa=maopao(aa);
+                    mapw.put(n, Arrays.asList(aa));
+                }
+        );
 
-        for (Integer key:map.keySet()) {
-            List<Integer> list=map.get(key);
-            Integer[] aa=list.toArray(new Integer[list.size()]);
-            aa=maopao(aa);
-            mapw.put(key, Arrays.asList(aa));
-        }
         return  mapw;
     }
 
@@ -74,6 +86,8 @@ public class StreamSort implements SortFactory {
 
             }
         }
+
+
         return a;
     }
 
